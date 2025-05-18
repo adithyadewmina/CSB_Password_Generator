@@ -16,14 +16,14 @@ COPY . .
 # Build the React application
 RUN npm run build
 
-# Use an official NGINX image to serve the built files
-FROM nginx:stable-alpine
+# Use an official Node image to serve the built files
+FROM node:18-slim
 
-# Copy the build output to the NGINX HTML directory
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy the build output to the HTML directory
+COPY --from=build /app/build .
 
-# Expose the default NGINX port
+# Expose the default port
 EXPOSE 80
 
 # Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", ".", "-p", "80"]
