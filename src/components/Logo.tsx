@@ -1,15 +1,25 @@
 
 import React from 'react';
-import { Lock } from 'lucide-react';
 
 const Logo: React.FC = () => {
+  const externalWebsiteUrl = "https://csbodima.lk";
+  
   return (
-    <div className="flex items-center gap-2">
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-2 rounded-lg">
-        <Lock className="h-5 w-5 text-white" />
+    <a 
+      href={externalWebsiteUrl}
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+    >
+      <div className="h-10 w-10">
+        <img 
+          src="/logo.webp" 
+          alt="CSBODIMA Logo" 
+          className="h-full w-full object-contain"
+        />
       </div>
       <span className="font-bold text-xl text-purple-800 dark:text-purple-300">CSB Developments</span>
-    </div>
+    </a>
   );
 };
 

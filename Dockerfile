@@ -1,29 +1,17 @@
-# Use an official Node.js image as the base
-FROM node:18-alpine AS build
+FROM node:22.14.0-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application files
 COPY . .
 
-# Build the React application
 RUN npm run build
 
-# Use an official Node image to serve the built files
-FROM node:18-slim
+RUN npm install -g serve
 
-# Copy the build output to the HTML directory
-COPY --from=build /app/build .
+EXPOSE 3000
 
-# Expose the default port
-EXPOSE 80
-
-# Start NGINX
-CMD ["serve", "-s", ".", "-p", "80"]
+CMD ["serve", "-s", "dist", "-l", "3000"]
